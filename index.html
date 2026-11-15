@@ -188,7 +188,25 @@
     .btn-no { background: #f3f1f7; color: #5c5375; border: 1.5px solid #ddd8e8; font-size: .9rem; padding: 10px 16px; }
     .row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
     .btn-soft { background: #eef4ff; color: #233876; border: 1.5px solid #c7d9ff; font-size: .88rem; }
-    .btn-voice { background: #ffe9f0; color: #b0224f; border: 1.5px solid #ffc2d6; display: none; }
+    .btn-voice { background: #ffe9f0; color: #b0224f; border: 1.5px solid #ffc2d6; }
+
+    /* ---------- Henry's video (pops up when the envelope opens) ---------- */
+    .video-overlay {
+      position: fixed; inset: 0; z-index: 40; display: none; flex-direction: column; align-items: center; justify-content: center;
+      background: rgba(10, 13, 40, .9); padding: 14px; gap: 12px;
+    }
+    .video-overlay.open { display: flex; animation: vidIn .45s cubic-bezier(.22, 1, .36, 1); }
+    .video-overlay.closing { animation: vidOut .5s cubic-bezier(.55, 0, .7, .3) forwards; }
+    @keyframes vidIn { from { opacity: 0; transform: scale(.7); } to { opacity: 1; transform: none; } }
+    @keyframes vidOut { to { opacity: 0; transform: translateY(38vh) scale(.12); } }
+    .video-overlay video {
+      max-width: 100%; max-height: calc(100dvh - 110px); border-radius: 22px; background: #121738;
+      box-shadow: 0 22px 55px rgba(0, 0, 0, .6), 0 0 0 5px rgba(255, 255, 255, .16);
+    }
+    .video-skip {
+      background: rgba(255, 255, 255, .14); color: #fff; border: 1px solid rgba(255, 255, 255, .35); cursor: pointer;
+      font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: .95rem; padding: 10px 24px; border-radius: 999px;
+    }
     .btn-link { background: none; color: #7c7296; font-size: .8rem; text-decoration: underline; padding: 6px; }
 
     .sign { text-align: center; margin-top: 14px; }
@@ -238,7 +256,7 @@
           Nos encantaría que nos acompañen a una tarde llena de juegos, risas y pastel.
         </p>
 
-        <button class="btn btn-voice" id="btn-voice" type="button">🔊 Escucha a Henry invitándote</button>
+        <button class="btn btn-voice" id="btn-video" type="button">🎬 Mira otra vez a Henry invitándote</button>
 
         <div class="facts">
           <div class="fact"><span class="e">📅</span><div><small>Cuándo</small><b>Sábado 21 de noviembre de 2026</b></div></div>
@@ -278,7 +296,10 @@
     </section>
   </main>
 
-  <audio id="voice" src="henry.mp3?v=4" preload="metadata"></audio>
+  <div class="video-overlay" id="video-overlay">
+    <video id="henry-video" src="henry.mp4?v=1" poster="henry-poster.jpg?v=1" playsinline preload="auto"></video>
+    <button class="video-skip" id="video-skip" type="button">Continuar ➜</button>
+  </div>
 
   <script>
     // ---------- Configuration ----------
@@ -330,12 +351,48 @@
       '&location=' + encodeURIComponent('Happy Time, Condado Shopping, Quito') +
       '&details=' + encodeURIComponent('Cumpleaños de Henry Alexander. ¡Los esperamos!');
 
-    // ---------- Optional voice note (shown only if henry.mp3 exists) ----------
-    const voice = $('voice');
-    const showVoice = () => { $('btn-voice').style.display = 'flex'; };
-    if (voice.readyState >= 1) showVoice(); // metadata may load before this script runs
-    else voice.addEventListener('loadedmetadata', showVoice);
-    $('btn-voice').addEventListener('click', () => { voice.currentTime = 0; voice.play(); });
+    // ---------- Henry's video: pops up when the envelope opens, then lives in a button ----------
+    const video = $('henry-video');
+    const overlay = $('video-overlay');
+    let videoBroken = false;
+    let afterVideo = null;
+    video.addEventListener('error', () => {
+      videoBroken = true;
+      $('btn-video').style.display = 'none';
+      if (overlay.classList.contains('open')) closeVideo();
+    });
+
+    // Must run inside a tap handler: mobile browsers only allow sound after a user gesture.
+    function unlockVideo() {
+      const p = video.play();
+      if (p && p.then) p.then(() => { if (!overlay.classList.contains('open')) video.pause(); }).catch(() => {});
+    }
+
+    function openVideo(next) {
+      afterVideo = next || null;
+      if (videoBroken) { if (afterVideo) afterVideo(); return; }
+      overlay.classList.remove('closing');
+      overlay.classList.add('open');
+      video.currentTime = 0;
+      const p = video.play();
+      if (p && p.catch) p.catch(() => { video.controls = true; }); // autoplay refused: let them press play
+    }
+
+    function closeVideo() {
+      if (!overlay.classList.contains('open') || overlay.classList.contains('closing')) return;
+      video.pause();
+      overlay.classList.add('closing');
+      setTimeout(() => {
+        overlay.classList.remove('open', 'closing');
+        const next = afterVideo;
+        afterVideo = null;
+        if (next) next();
+      }, 480);
+    }
+
+    video.addEventListener('ended', () => setTimeout(closeVideo, 500));
+    $('video-skip').addEventListener('click', closeVideo);
+    $('btn-video').addEventListener('click', () => openVideo());
 
     // ---------- Background stars ----------
     for (let i = 0; i < 30; i++) {
@@ -419,7 +476,8 @@
       opening = true;
       $('envelope').classList.add('opening');
       burst(innerWidth / 2, innerHeight * 0.4, 80);
-      setTimeout(() => { buildGame(); show('s-game'); }, 800);
+      unlockVideo();
+      setTimeout(() => { buildGame(); show('s-game'); openVideo(); }, 800);
     }
     $('envelope').addEventListener('click', openEnvelope);
     $('open-cta').addEventListener('click', openEnvelope);
