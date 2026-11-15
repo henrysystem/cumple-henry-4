@@ -297,7 +297,7 @@
   </main>
 
   <div class="video-overlay" id="video-overlay">
-    <video id="henry-video" src="henry.mp4?v=3" poster="henry-poster.jpg?v=1" playsinline preload="auto"></video>
+    <video id="henry-video" src="henry.mp4?v=4" poster="henry-poster.jpg?v=1" playsinline preload="auto"></video>
     <button class="video-skip" id="video-skip" type="button">Continuar ➜</button>
   </div>
 
@@ -351,7 +351,7 @@
       '&location=' + encodeURIComponent('Happy Time, Condado Shopping, Quito') +
       '&details=' + encodeURIComponent('Cumpleaños de Henry Alexander. ¡Los esperamos!');
 
-    // ---------- Henry's video: pops up when the envelope opens, then lives in a button ----------
+    // ---------- Henry's video: pops up when the invitation card appears, then lives in a button ----------
     const video = $('henry-video');
     const overlay = $('video-overlay');
     let videoBroken = false;
@@ -459,9 +459,11 @@
           document.querySelectorAll('#progress .dot')[popped].classList.add('on');
           popped++;
           if (popped === CLUES.length) {
+            unlockVideo(); // last tap before the card: lets the video start with sound
             setTimeout(() => {
               show('s-card');
               burst(innerWidth / 2, innerHeight * 0.3, 140);
+              setTimeout(openVideo, 700); // the video pops over the card, then hides into its button
             }, 1900);
           }
         }, { once: true });
@@ -476,8 +478,7 @@
       opening = true;
       $('envelope').classList.add('opening');
       burst(innerWidth / 2, innerHeight * 0.4, 80);
-      unlockVideo();
-      setTimeout(() => { buildGame(); show('s-game'); openVideo(); }, 800);
+      setTimeout(() => { buildGame(); show('s-game'); }, 800);
     }
     $('envelope').addEventListener('click', openEnvelope);
     $('open-cta').addEventListener('click', openEnvelope);
