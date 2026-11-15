@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>¡Henry Alexander cumple 4 años!</title>
+  <meta property="og:title" content="🎈 ¡Henry Alexander cumple 4 años!" />
+  <meta property="og:description" content="Tienes una invitación especial. ¡Revienta los 4 globos para descubrirla!" />
+  <meta property="og:image" content="https://henrysystem.github.io/cumple-henry-4/preview.jpg" />
+  <meta property="og:image:width" content="840" />
+  <meta property="og:image:height" content="840" />
+  <meta property="og:url" content="https://henrysystem.github.io/cumple-henry-4/" />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #ffcc33;
+      --coral: #ff5e62;
+      --cyan: #00d2ff;
+      --mint: #25d366;
+      --violet: #a855f7;
+      --paper: #fffdf8;
+      --ink: #1f1935;
+      --ink-soft: #5c5375;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+    body {
+      min-height: 100vh;
+      min-height: 100dvh;
+      font-family: 'Nunito', system-ui, sans-serif;
+      background: radial-gradient(circle at 50% 15%, #374b9c 0%, #1a2456 45%, #121738 100%);
+      color: var(--ink);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 18px 14px 28px;
+      overflow-x: hidden;
+    }
+
+    .sky { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+    .star {
+      position: absolute; background: #fff; border-radius: 50%;
+      box-shadow: 0 0 8px #fff; animation: twinkle var(--dur, 3s) ease-in-out infinite alternate;
+    }
+    @keyframes twinkle { from { transform: scale(.6); opacity: .25; } to { transform: scale(1.25); opacity: .95; } }
+
+    #confetti { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 30; }
+
+    .stage { position: relative; z-index: 5; width: 100%; max-width: 460px; display: flex; flex-direction: column; align-items: center; }
+    .screen { width: 100%; display: none; flex-direction: column; align-items: center; animation: rise .55s cubic-bezier(.22, 1, .36, 1); }
+    .screen.active { display: flex; }
+    @keyframes rise { from { opacity: 0; transform: translateY(26px) scale(.96); } to { opacity: 1; transform: none; } }
+
+    .test-banner {
+      display: none; width: 100%; max-width: 460px; z-index: 6; position: relative;
+      background: #fff3cd; color: #7a5200; border: 2px dashed #e6a700; border-radius: 12px;
+      font-weight: 800; font-size: .82rem; text-align: center; padding: 7px 10px; margin-bottom: 12px;
+    }
+
+    h1, h2, .fredoka { font-family: 'Fredoka', sans-serif; }
+
+    /* ---------- Screen 1: envelope ---------- */
+    .intro-title { color: #fff; font-size: 1.6rem; text-align: center; margin-top: 18px; text-shadow: 0 3px 12px rgba(0, 0, 0, .35); }
+    .intro-title span { color: var(--gold); }
+    .intro-sub { color: rgba(255, 255, 255, .85); font-size: .98rem; text-align: center; margin-top: 6px; }
+
+    .envelope {
+      position: relative; width: min(340px, 88vw); aspect-ratio: 340 / 235; margin: 34px 0 26px;
+      cursor: pointer; border: none; background: none; animation: bob 2.6s ease-in-out infinite;
+    }
+    @keyframes bob { 0%, 100% { transform: translateY(0) rotate(-1.5deg); } 50% { transform: translateY(-9px) rotate(1.5deg); } }
+    .env-back { position: absolute; inset: 0; background: #e2be79; border-radius: 14px; box-shadow: 0 22px 45px rgba(0, 0, 0, .45); }
+    .env-pocket { position: absolute; inset: 0; border-radius: 14px; overflow: hidden; }
+    .env-pocket::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(155deg, transparent 48%, #f3d59b 49%), linear-gradient(205deg, transparent 48%, #eccb88 49%);
+    }
+    .env-flap {
+      position: absolute; top: 0; left: 0; right: 0; height: 62%; background: #eac885;
+      clip-path: polygon(0 0, 50% 100%, 100% 0); transform-origin: top center;
+      transition: transform .6s cubic-bezier(.4, 0, .2, 1); filter: drop-shadow(0 5px 8px rgba(0, 0, 0, .15));
+    }
+    .env-to {
+      position: absolute; left: 0; right: 0; bottom: 9%; text-align: center; z-index: 2;
+      font-family: 'Caveat', cursive; font-size: 1.9rem; color: #6b4a12; line-height: 1;
+    }
+    .env-to small { display: block; font-family: 'Nunito', sans-serif; font-size: .68rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: #9a7630; }
+    .seal {
+      position: absolute; top: 50%; left: 50%; width: 70px; height: 70px; border-radius: 50%; z-index: 3;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle at 35% 30%, #ff7b7e, #d92b38 70%, #9e1922 100%);
+      border: 3px solid #ffdf80; box-shadow: 0 6px 16px rgba(0, 0, 0, .32);
+      display: flex; flex-direction: column; align-items: center; justify-content: center; color: #fff;
+      font-family: 'Fredoka', sans-serif; transition: transform .35s, opacity .35s;
+    }
+    .seal b { font-size: 1.6rem; line-height: 1; color: var(--gold); }
+    .seal i { font-style: normal; font-size: .58rem; letter-spacing: .08em; text-transform: uppercase; }
+    .envelope.opening { animation: none; }
+    .envelope.opening .env-flap { transform: rotateX(180deg); }
+    .envelope.opening .seal { transform: translate(-50%, -50%) scale(.2); opacity: 0; }
+
+    .cta {
+      background: linear-gradient(135deg, var(--gold), #ff9f1c); color: #2b1d00; border: none; cursor: pointer;
+      font-family: 'Fredoka', sans-serif; font-weight: 700; font-size: 1.05rem; padding: 13px 28px; border-radius: 999px;
+      box-shadow: 0 8px 24px rgba(255, 190, 20, .4);
+    }
+
+    /* ---------- Screen 2: balloon game ---------- */
+    .game-title { color: #fff; font-size: 1.45rem; text-align: center; margin-top: 6px; text-shadow: 0 3px 12px rgba(0, 0, 0, .35); }
+    .game-sub { color: rgba(255, 255, 255, .88); text-align: center; font-size: .95rem; margin-top: 4px; }
+    .progress { display: flex; gap: 8px; margin: 12px 0 4px; }
+    .dot { width: 14px; height: 14px; border-radius: 50%; background: rgba(255, 255, 255, .22); border: 2px solid rgba(255, 255, 255, .5); transition: all .3s; }
+    .dot.on { background: var(--gold); border-color: #fff; transform: scale(1.2); }
+
+    .balloons { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 14px; width: 100%; margin-top: 14px; }
+    .slot { position: relative; height: 210px; display: flex; align-items: flex-start; justify-content: center; }
+
+    .balloon {
+      position: relative; width: 112px; height: 136px; border: none; cursor: pointer; margin-top: 8px;
+      border-radius: 50% 50% 50% 50% / 45% 45% 55% 55%; background: var(--c);
+      box-shadow: inset -12px -14px 22px rgba(0, 0, 0, .2), inset 10px 10px 20px rgba(255, 255, 255, .45), 0 12px 24px rgba(0, 0, 0, .3);
+      animation: sway var(--d, 3s) ease-in-out infinite alternate; transform-origin: 50% 160%;
+      font-family: 'Fredoka', sans-serif; font-weight: 700; font-size: 3rem; color: rgba(255, 255, 255, .95);
+      text-shadow: 0 3px 8px rgba(0, 0, 0, .25);
+    }
+    .balloon::before { /* knot */
+      content: ''; position: absolute; bottom: -9px; left: 50%; transform: translateX(-50%);
+      border: 8px solid transparent; border-bottom-color: var(--c); border-top: 0;
+    }
+    .balloon::after { /* string */
+      content: ''; position: absolute; top: 100%; left: 50%; width: 2px; height: 52px; margin-top: 8px; background: rgba(255, 255, 255, .5);
+    }
+    @keyframes sway { from { transform: rotate(-5deg); } to { transform: rotate(5deg); } }
+    .balloon.pop { animation: pop .22s ease-out forwards; pointer-events: none; }
+    @keyframes pop { 50% { transform: scale(1.28); opacity: 1; } 100% { transform: scale(.1); opacity: 0; } }
+
+    .reveal {
+      position: absolute; inset: 6px 0 auto 0; display: none; flex-direction: column; align-items: center; text-align: center;
+      background: var(--paper); border-radius: 18px; padding: 14px 10px 12px; min-height: 190px; justify-content: center;
+      box-shadow: 0 14px 30px rgba(0, 0, 0, .4), inset 0 0 0 2px #f5ebd6; border-top: 6px solid var(--c);
+    }
+    .reveal.show { display: flex; animation: rise .45s cubic-bezier(.22, 1, .36, 1); }
+    .reveal .ico { font-size: 2rem; line-height: 1; }
+    .reveal .lbl { font-size: .66rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #7c7296; margin-top: 6px; }
+    .reveal .val { font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 1.06rem; line-height: 1.2; color: var(--ink); margin-top: 3px; }
+    .reveal .sub { font-size: .8rem; font-weight: 700; color: var(--ink-soft); margin-top: 3px; }
+
+    /* ---------- Screen 3: final card ---------- */
+    .card {
+      width: 100%; background: var(--paper); border-radius: 22px; padding: 20px 20px 18px; margin-top: 6px;
+      box-shadow: 0 22px 55px rgba(0, 0, 0, .5), 0 0 0 5px rgba(255, 255, 255, .14), inset 0 0 0 2px #f5ebd6;
+    }
+    .card .tag { display: inline-block; background: #fff0d4; color: #b86e00; font-family: 'Fredoka', sans-serif; font-size: .74rem; font-weight: 600; padding: 3px 10px; border-radius: 99px; text-transform: uppercase; letter-spacing: .05em; }
+    .card h1 { font-size: 1.6rem; line-height: 1.15; margin-top: 6px; }
+    .card h1 span { color: var(--coral); }
+    .card .hello { font-family: 'Fredoka', sans-serif; font-size: 1.08rem; margin-top: 12px; }
+    .card p { font-size: .97rem; line-height: 1.5; color: #362f4b; margin-top: 6px; }
+    .card p strong { color: #d9384a; }
+
+    .facts { display: grid; gap: 7px; margin: 14px 0; }
+    .fact { display: flex; align-items: center; gap: 11px; background: #fdf6e9; border: 1.5px solid #f0dec0; border-radius: 13px; padding: 8px 12px; }
+    .fact .e { font-size: 1.35rem; }
+    .fact b { font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 1rem; display: block; line-height: 1.2; }
+    .fact small { font-size: .7rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: #7c7296; }
+
+    .countdown { background: linear-gradient(135deg, #232f6b, #3b2667); color: #fff; border-radius: 14px; padding: 10px 12px; text-align: center; }
+    .countdown .t { font-size: .72rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+    .cd { display: grid; grid-template-columns: repeat(4, 1fr); gap: 7px; }
+    .cd div { background: rgba(255, 255, 255, .13); border-radius: 9px; padding: 5px 4px; }
+    .cd b { font-family: 'Fredoka', sans-serif; font-size: 1.2rem; display: block; line-height: 1.1; }
+    .cd small { font-size: .64rem; text-transform: uppercase; opacity: .82; }
+
+    .rsvp { margin-top: 16px; text-align: center; }
+    .rsvp h2 { font-size: 1.15rem; }
+    .rsvp .hint { font-size: .82rem; font-weight: 700; color: var(--ink-soft); margin-top: 2px; }
+    .btn {
+      width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; cursor: pointer;
+      border: none; border-radius: 13px; padding: 13px 16px; margin-top: 9px;
+      font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 1rem; transition: transform .15s;
+    }
+    .btn:active { transform: scale(.97); }
+    .btn-yes { background: linear-gradient(135deg, #25d366, #128c7e); color: #fff; font-size: 1.1rem; box-shadow: 0 6px 18px rgba(37, 211, 102, .35); }
+    .btn-no { background: #f3f1f7; color: #5c5375; border: 1.5px solid #ddd8e8; font-size: .9rem; padding: 10px 16px; }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .btn-soft { background: #eef4ff; color: #233876; border: 1.5px solid #c7d9ff; font-size: .88rem; }
+    .btn-voice { background: #ffe9f0; color: #b0224f; border: 1.5px solid #ffc2d6; display: none; }
+    .btn-link { background: none; color: #7c7296; font-size: .8rem; text-decoration: underline; padding: 6px; }
+
+    .sign { text-align: center; margin-top: 14px; }
+    .sign .n { font-family: 'Caveat', cursive; font-size: 1.8rem; color: #d92b38; line-height: 1.1; }
+    .sign .s { font-family: 'Fredoka', sans-serif; font-size: .84rem; }
+  </style>
+</head>
+<body>
+  <canvas id="confetti"></canvas>
+  <div class="sky" id="sky"></div>
+  <div class="test-banner" id="test-banner"></div>
+
+  <main class="stage">
+    <!-- Screen 1: envelope -->
+    <section class="screen active" id="s-envelope">
+      <h1 class="intro-title">¡Llegó una carta<br>para <span id="intro-name">ti</span>! ✉️</h1>
+      <p class="intro-sub">Alguien muy especial te quiere invitar a algo…</p>
+      <button class="envelope" id="envelope" aria-label="Abrir la carta">
+        <div class="env-back"></div>
+        <div class="env-pocket"></div>
+        <div class="env-to"><small>Para</small><span id="env-name">ti</span></div>
+        <div class="env-flap"></div>
+        <div class="seal"><b>4</b><i>Años</i></div>
+      </button>
+      <button class="cta" id="open-cta">👆 Toca el sobre para abrirlo</button>
+    </section>
+
+    <!-- Screen 2: balloon game -->
+    <section class="screen" id="s-game">
+      <h2 class="game-title">🎈 ¡Revienta los 4 globos!</h2>
+      <p class="game-sub">Cada globo esconde una pista de la sorpresa</p>
+      <div class="progress" id="progress">
+        <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+      </div>
+      <div class="balloons" id="balloons"></div>
+    </section>
+
+    <!-- Screen 3: full invitation + RSVP -->
+    <section class="screen" id="s-card">
+      <article class="card">
+        <span class="tag">Invitación especial</span>
+        <h1>¡<span>Henry Alexander</span> cumple 4 años!</h1>
+        <div class="hello" id="hello">¡Hola, papis!</div>
+        <p>
+          <strong>Henry Alexander</strong> ya cumple <strong>4 años</strong> y está súper ilusionado por festejarlo
+          <span id="with-friend">con sus amiguitos favoritos de la escuela</span>.
+          Nos encantaría que nos acompañen a una tarde llena de juegos, risas y pastel.
+        </p>
+
+        <button class="btn btn-voice" id="btn-voice" type="button">🔊 Escucha a Henry invitándote</button>
+
+        <div class="facts">
+          <div class="fact"><span class="e">📅</span><div><small>Cuándo</small><b>Sábado 21 de noviembre de 2026</b></div></div>
+          <div class="fact"><span class="e">🕒</span><div><small>A qué hora</small><b>3:30 p. m.</b></div></div>
+          <div class="fact"><span class="e">📍</span><div><small>Dónde</small><b>Happy Time — Condado Shopping</b></div></div>
+        </div>
+
+        <div class="countdown">
+          <div class="t">⏳ Falta para el gran día</div>
+          <div class="cd">
+            <div><b id="cd-d">00</b><small>Días</small></div>
+            <div><b id="cd-h">00</b><small>Horas</small></div>
+            <div><b id="cd-m">00</b><small>Min</small></div>
+            <div><b id="cd-s">00</b><small>Seg</small></div>
+          </div>
+        </div>
+
+        <div class="rsvp">
+          <h2 id="rsvp-title">¿Nos acompañan?</h2>
+          <div class="hint">Un toque y se abre WhatsApp con el mensaje listo para enviar a Valeria</div>
+          <a class="btn btn-yes" id="btn-yes" target="_blank" rel="noopener">🎉 ¡Sí, vamos!</a>
+          <a class="btn btn-no" id="btn-no" target="_blank" rel="noopener">😢 No podremos ir</a>
+        </div>
+
+        <div class="row">
+          <a class="btn btn-soft" id="btn-cal" target="_blank" rel="noopener">📆 Agendar</a>
+          <a class="btn btn-soft" target="_blank" rel="noopener"
+             href="https://www.google.com/maps/search/?api=1&query=Happy+Time+Condado+Shopping+Quito">📍 Cómo llegar</a>
+        </div>
+
+        <div class="sign">
+          <div class="n">Henry y Valeria</div>
+          <div class="s">Papás de Henry Alexander 🎈🎂</div>
+        </div>
+        <button class="btn btn-link" id="btn-replay" type="button">🔄 Jugar otra vez</button>
+      </article>
+    </section>
+  </main>
+
+  <audio id="voice" src="henry.mp3" preload="metadata"></audio>
+
+  <script>
+    // ---------- Configuration ----------
+    const HOST_PHONE = '593998902182'; // Valeria (+593 99 890 2182)
+    const FRIENDS = { maite: 'Maite', theo: 'Theo', benjamin: 'Benjamin', ian: 'Ian', hanna: 'Hanna' };
+    const EVENT_START = '2026-11-21T15:30:00-05:00';
+
+    const params = new URLSearchParams(location.search);
+    const friend = FRIENDS[(params.get('a') || '').toLowerCase()] || null;
+
+    // Test mode: ?prueba=09XXXXXXXX sends the RSVP to that number instead of the host.
+    function normalizePhone(raw) {
+      let d = (raw || '').replace(/\D/g, '');
+      if (d.startsWith('0')) d = '593' + d.slice(1);
+      return d.length >= 11 ? d : null;
+    }
+    const testPhone = normalizePhone(params.get('prueba'));
+    const phone = testPhone || HOST_PHONE;
+
+    const $ = (id) => document.getElementById(id);
+
+    // ---------- Personalization ----------
+    if (friend) {
+      $('intro-name').textContent = friend;
+      $('env-name').textContent = friend;
+      $('hello').textContent = `¡Hola, papis de ${friend}!`;
+      $('with-friend').textContent = `con ${friend} y sus amiguitos favoritos de la escuela`;
+      $('rsvp-title').textContent = `¿Nos acompaña ${friend}?`;
+    }
+    if (testPhone) {
+      const b = $('test-banner');
+      b.style.display = 'block';
+      b.textContent = `🧪 MODO PRUEBA — la confirmación llega al +${testPhone}, no a Valeria`;
+    }
+
+    const who = friend ? `Somos los papás de ${friend}. ` : '';
+    const waLink = (text) => `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
+    $('btn-yes').href = waLink(
+      `¡Hola Valeria! 🎉 ${who}¡Sí vamos al cumple de 4 años de Henry Alexander! ` +
+      `Sábado 21 de noviembre, 3:30 p. m., en Happy Time del Condado Shopping. 🎈🎂`
+    );
+    $('btn-no').href = waLink(
+      `¡Hola Valeria! ${who}Lamentablemente no podremos acompañarlos en el cumple de Henry Alexander 😢 ` +
+      `¡Le mandamos un abrazo enorme! 🎂`
+    );
+    $('btn-cal').href = 'https://calendar.google.com/calendar/render?action=TEMPLATE' +
+      '&text=' + encodeURIComponent('🎂 Cumple de Henry Alexander (4 años)') +
+      '&dates=20261121T203000Z/20261121T230000Z' +
+      '&location=' + encodeURIComponent('Happy Time, Condado Shopping, Quito') +
+      '&details=' + encodeURIComponent('Cumpleaños de Henry Alexander. ¡Los esperamos!');
+
+    // ---------- Optional voice note (shown only if henry.mp3 exists) ----------
+    const voice = $('voice');
+    const showVoice = () => { $('btn-voice').style.display = 'flex'; };
+    if (voice.readyState >= 1) showVoice(); // metadata may load before this script runs
+    else voice.addEventListener('loadedmetadata', showVoice);
+    $('btn-voice').addEventListener('click', () => { voice.currentTime = 0; voice.play(); });
+
+    // ---------- Background stars ----------
+    for (let i = 0; i < 30; i++) {
+      const s = document.createElement('div');
+      s.className = 'star';
+      const size = (Math.random() * 3.5 + 2).toFixed(1) + 'px';
+      s.style.cssText = `width:${size};height:${size};left:${Math.random() * 100}%;top:${Math.random() * 100}%;` +
+        `--dur:${(Math.random() * 2.5 + 1.8).toFixed(1)}s`;
+      $('sky').appendChild(s);
+    }
+
+    // ---------- Screens ----------
+    function show(id) {
+      document.querySelectorAll('.screen').forEach((el) => el.classList.toggle('active', el.id === id));
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ---------- Pop sound (Web Audio, no asset needed) ----------
+    let audioCtx = null;
+    function popSound() {
+      try {
+        audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+        const o = audioCtx.createOscillator(), g = audioCtx.createGain(), t = audioCtx.currentTime;
+        o.type = 'triangle';
+        o.frequency.setValueAtTime(520, t);
+        o.frequency.exponentialRampToValueAtTime(90, t + 0.12);
+        g.gain.setValueAtTime(0.35, t);
+        g.gain.exponentialRampToValueAtTime(0.001, t + 0.14);
+        o.connect(g).connect(audioCtx.destination);
+        o.start(t); o.stop(t + 0.15);
+      } catch (e) { /* sound is optional */ }
+    }
+
+    // ---------- Balloon game ----------
+    const CLUES = [
+      { c: '#ff5e62', ico: '🎂', lbl: '¿Quién cumple?', val: 'Henry Alexander', sub: '¡cumple 4 años!' },
+      { c: '#ffb703', ico: '📅', lbl: '¿Cuándo?', val: 'Sábado 21 de noviembre', sub: 'de 2026' },
+      { c: '#00b4d8', ico: '🕒', lbl: '¿A qué hora?', val: '3:30 p. m.', sub: '¡a jugar toda la tarde!' },
+      { c: '#a855f7', ico: '📍', lbl: '¿Dónde?', val: 'Happy Time', sub: 'Condado Shopping' },
+    ];
+    let popped = 0;
+
+    function buildGame() {
+      popped = 0;
+      document.querySelectorAll('#progress .dot').forEach((d) => d.classList.remove('on'));
+      const wrap = $('balloons');
+      wrap.innerHTML = '';
+      CLUES.forEach((clue, i) => {
+        const slot = document.createElement('div');
+        slot.className = 'slot';
+        slot.style.setProperty('--c', clue.c);
+        slot.innerHTML =
+          `<button class="balloon" style="--d:${2.4 + i * 0.35}s" aria-label="Globo ${i + 1}">${i + 1}</button>` +
+          `<div class="reveal"><span class="ico">${clue.ico}</span><span class="lbl">${clue.lbl}</span>` +
+          `<span class="val">${clue.val}</span><span class="sub">${clue.sub}</span></div>`;
+        const balloon = slot.querySelector('.balloon');
+        balloon.addEventListener('click', () => {
+          const r = balloon.getBoundingClientRect();
+          balloon.classList.add('pop');
+          popSound();
+          burst(r.left + r.width / 2, r.top + r.height / 2, 45, clue.c);
+          if (navigator.vibrate) navigator.vibrate(30);
+          setTimeout(() => slot.querySelector('.reveal').classList.add('show'), 180);
+          document.querySelectorAll('#progress .dot')[popped].classList.add('on');
+          popped++;
+          if (popped === CLUES.length) {
+            setTimeout(() => {
+              show('s-card');
+              burst(innerWidth / 2, innerHeight * 0.3, 140);
+            }, 1900);
+          }
+        }, { once: true });
+        wrap.appendChild(slot);
+      });
+    }
+
+    // ---------- Envelope ----------
+    let opening = false;
+    function openEnvelope() {
+      if (opening) return;
+      opening = true;
+      $('envelope').classList.add('opening');
+      burst(innerWidth / 2, innerHeight * 0.4, 80);
+      setTimeout(() => { buildGame(); show('s-game'); }, 800);
+    }
+    $('envelope').addEventListener('click', openEnvelope);
+    $('open-cta').addEventListener('click', openEnvelope);
+    $('btn-replay').addEventListener('click', () => {
+      opening = false;
+      $('envelope').classList.remove('opening');
+      show('s-envelope');
+    });
+
+    // ---------- Countdown ----------
+    const target = new Date(EVENT_START).getTime();
+    function tick() {
+      const diff = Math.max(0, target - Date.now());
+      const pad = (n) => String(Math.floor(n)).padStart(2, '0');
+      $('cd-d').textContent = pad(diff / 864e5);
+      $('cd-h').textContent = pad((diff / 36e5) % 24);
+      $('cd-m').textContent = pad((diff / 6e4) % 60);
+      $('cd-s').textContent = pad((diff / 1e3) % 60);
+    }
+    tick();
+    setInterval(tick, 1000);
+
+    // ---------- Confetti ----------
+    const canvas = $('confetti');
+    const ctx = canvas.getContext('2d');
+    let parts = [];
+    let raf = null;
+    function resize() { canvas.width = innerWidth; canvas.height = innerHeight; }
+    addEventListener('resize', resize);
+    resize();
+
+    function burst(x, y, count, tint) {
+      const colors = ['#ff5e62', '#ffcc33', '#00d2ff', '#25d366', '#a855f7', '#ffffff'];
+      for (let i = 0; i < count; i++) {
+        parts.push({
+          x, y,
+          vx: (Math.random() - 0.5) * 14,
+          vy: -(Math.random() * 10 + 3),
+          size: Math.random() * 8 + 5,
+          color: tint && i % 2 ? tint : colors[Math.floor(Math.random() * colors.length)],
+          rot: Math.random() * 6.28,
+          vrot: (Math.random() - 0.5) * 0.25,
+          alpha: 1,
+        });
+      }
+      if (!raf) draw();
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (const p of parts) {
+        p.x += p.vx; p.y += p.vy; p.vy += 0.24; p.vx *= 0.99; p.rot += p.vrot;
+        if (p.y > canvas.height * 0.8) p.alpha -= 0.03;
+        ctx.save();
+        ctx.globalAlpha = Math.max(0, p.alpha);
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rot);
+        ctx.fillStyle = p.color;
+        ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.65);
+        ctx.restore();
+      }
+      parts = parts.filter((p) => p.alpha > 0 && p.y < canvas.height + 40);
+      raf = parts.length ? requestAnimationFrame(draw) : null;
+    }
+  </script>
+</body>
+</html>
